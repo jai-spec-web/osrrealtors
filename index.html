@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSR Realtors — Premium Real Estate | Faridabad & Palwal</title>
+<meta name="description" content="OSR Realtors — Luxury real estate in Faridabad & Palwal. 8 premium partners, 7 projects, 5.0 Google rating.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#C9A84C;--gold-light:#E8C96A;--gold-dark:#A07830;
+  --black:#080808;--dark:#111111;--dark2:#1a1a1a;
+  --white:#FFFFFF;--off-white:#F8F6F2;--cream:#F2EDE4;
+  --text-dark:#1A1A1A;--text-muted:#888888;--maroon:#7B1C1C;
+  --border-dark:rgba(201,168,76,0.15);--border-light:#E8E0D0;
+}
+html{scroll-behavior:auto;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;background:#080808;color:#fff;overflow-x:hidden;cursor:none}
+
+/* CUSTOM CURSOR */
+#cursor{position:fixed;width:10px;height:10px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
+#cursor-ring{position:fixed;width:38px;height:38px;border:1px solid rgba(201,168,76,.5);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:transform .08s linear,width .2s,height .2s,border-color .2s}
+
+/* PAGE LOADER */
+#loader{position:fixed;inset:0;background:#080808;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+#loader-logo{opacity:0;transform:translateY(20px)}
+#loader-bar-wrap{width:240px;height:1px;background:rgba(201,168,76,.2)}
+#loader-bar{height:1px;width:0%;background:var(--gold)}
+#loader-pct{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.3em;color:rgba(201,168,76,.6);margin-top:12px}
+
+/* PROGRESS BAR */
+#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold-dark),var(--gold-light));width:0%;z-index:9000;pointer-events:none}
+
+/* NAVBAR */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:8000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:72px;transition:background .4s,backdrop-filter .4s,border-bottom .4s}
+#navbar.scrolled{background:rgba(8,8,8,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-dark)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{text-decoration:none;font-size:13px;letter-spacing:.08em;color:rgba(255,255,255,.7);transition:color .3s;font-weight:500}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold);color:#000;padding:10px 24px;font-size:12px;letter-spacing:.1em;font-weight:600;text-decoration:none;transition:background .3s,transform .2s}
+.nav-cta:hover{background:var(--gold-light);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:24px;height:1.5px;background:var(--gold);display:block;transition:.3s}
+
+/* MOBILE NAV */
+#mobile-nav{position:fixed;inset:0;background:#080808;z-index:7999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;transform:translateX(100%);transition:transform .5s cubic-bezier(.76,0,.24,1)}
+#mobile-nav.open{transform:translateX(0)}
+#mobile-nav a{font-family:'Playfair Display',serif;font-size:28px;color:#fff;text-decoration:none;opacity:.7;transition:opacity .3s,color .3s}
+#mobile-nav a:hover{opacity:1;color:var(--gold)}
+#mobile-close{position:absolute;top:24px;right:5%;font-size:28px;color:rgba(255,255,255,.5);cursor:pointer;background:none;border:none}
+
+/* HERO */
+#hero{position:relative;height:100vh;display:flex;align-items:flex-end;justify-content:flex-start;padding:0 7% 10vh;overflow:hidden;background:#080808;contain:paint}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.65) 100%);z-index:1}
+.hero-grid{position:absolute;inset:0;z-index:0;
+  background-image:linear-gradient(rgba(201,168,76,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.05) 1px,transparent 1px);
+  background-size:80px 80px}
+.hero-content{position:relative;z-index:2;max-width:700px}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:28px;opacity:0;transform:translateY(30px)}
+.hero-eyebrow span{font-size:11px;letter-spacing:.4em;color:var(--gold);font-weight:600;text-transform:uppercase}
+.hero-eyebrow-line{width:40px;height:1px;background:var(--gold)}
+.hero-rating{display:flex;align-items:center;gap:6px;background:rgba(201,168,76,.1);border:1px solid var(--border-dark);padding:6px 14px;border-radius:2px}
+.hero-rating span{font-size:11px;letter-spacing:.05em;color:rgba(255,255,255,.7)}
+.hero-stars{color:var(--gold);font-size:12px;letter-spacing:2px}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(48px,7vw,96px);font-weight:900;line-height:1.02;margin-bottom:28px;overflow:hidden}
+.hero-h1 .word{display:inline-block;overflow:hidden}
+.hero-h1 .word .inner{display:inline-block;transform:translateY(110%)}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.55);line-height:1.7;max-width:480px;margin-bottom:40px;opacity:0;transform:translateY(20px)}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;opacity:0;transform:translateY(20px)}
+.btn-gold{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#000;padding:15px 32px;font-size:13px;letter-spacing:.1em;font-weight:700;text-decoration:none;transition:background .3s,transform .2s}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(201,168,76,.4);color:rgba(255,255,255,.8);padding:15px 32px;font-size:13px;letter-spacing:.1em;font-weight:500;text-decoration:none;transition:border-color .3s,color .3s}
+.btn-outline:hover{border-color:var(--gold);color:#fff}
+.hero-scroll{position:absolute;bottom:40px;right:7%;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px}
+.hero-scroll span{font-size:10px;letter-spacing:.3em;color:rgba(255,255,255,.3);writing-mode:vertical-rl;text-transform:uppercase}
+.hero-scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{transform:scaleY(1);opacity:.5}50%{transform:scaleY(1.2);opacity:1}}
+
+/* STATS BAR */
+#stats{background:var(--off-white);padding:70px 7%;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;position:relative;overflow:hidden}
+.stat-item{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px 20px;background:#fff;position:relative;overflow:hidden}
+.stat-item::before{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--gold);transition:width .5s}
+.stat-item:hover::before{width:60%}
+.stat-num{font-family:'Playfair Display',serif;font-size:clamp(40px,4vw,60px);font-weight:900;color:var(--text-dark);line-height:1;margin-bottom:10px}
+.stat-num span{color:var(--gold)}
+.stat-label{font-size:12px;letter-spacing:.2em;color:var(--text-muted);text-transform:uppercase;font-weight:500}
+
+/* PARTNERS SECTION */
+#partners{min-height:100vh;background:var(--off-white);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 7%;position:relative;overflow:hidden}
+#partners::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border-light),transparent)}
+.section-badge{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--border-light);padding:8px 20px;margin-bottom:24px}
+.section-badge span{font-size:10px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;font-weight:600}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(36px,4.5vw,64px);font-weight:700;color:var(--text-dark);text-align:center;margin-bottom:16px;line-height:1.1}
+.section-subtitle{font-size:15px;color:var(--text-muted);text-align:center;max-width:520px;line-height:1.7;margin-bottom:64px}
+.partners-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;width:100%;background:var(--border-light);border:1px solid var(--border-light)}
+.partner-cell{background:#fff;padding:44px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;transition:background .3s;position:relative;overflow:hidden}
+.partner-cell::before{content:'';position:absolute;inset:0;background:var(--gold);transform:scaleY(0);transform-origin:bottom;transition:transform .4s cubic-bezier(.76,0,.24,1);z-index:0}
+.partner-cell:hover::before{transform:scaleY(1)}
+.partner-icon{width:44px;height:44px;border:1px solid var(--border-light);display:flex;align-items:center;justify-content:center;position:relative;z-index:1;transition:border-color .3s}
+.partner-cell:hover .partner-icon{border-color:rgba(0,0,0,.3)}
+.partner-name{font-size:13px;font-weight:600;color:var(--text-dark);letter-spacing:.05em;text-align:center;position:relative;z-index:1;transition:color .3s}
+.partner-type{font-size:11px;color:var(--text-muted);letter-spacing:.1em;text-align:center;position:relative;z-index:1;transition:color .3s;text-transform:uppercase}
+.partner-cell:hover .partner-name,.partner-cell:hover .partner-type{color:#000}
+
+/* PROJECTS — HORIZONTAL SCROLL */
+#projects-pin{height:100vh;overflow:hidden;position:relative}
+.projects-track{display:flex;height:100vh;will-change:transform}
+.proj-slide{flex:0 0 100vw;width:100vw;height:100vh;position:relative;overflow:hidden}
+.proj-bg{position:absolute;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center center;background-repeat:no-repeat}
+.proj-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.45) 50%,rgba(0,0,0,0.3) 100%)}
+.proj-num{position:absolute;left:6%;top:50%;transform:translateY(-50%);font-family:'Playfair Display',serif;font-size:clamp(100px,18vw,220px);font-weight:900;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;user-select:none}
+.proj-card{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:min(420px,42vw);background:rgba(10,8,6,.85);border:1px solid rgba(201,168,76,.2);padding:48px 40px;backdrop-filter:blur(20px)}
+.proj-card-badge{font-size:10px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.proj-card-badge::before{content:'';display:block;width:20px;height:1px;background:var(--gold)}
+.proj-card-title{font-family:'Playfair Display',serif;font-size:clamp(22px,2.5vw,34px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px}
+.proj-card-loc{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:.1em;margin-bottom:28px;display:flex;align-items:center;gap:6px}
+.proj-card-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.proj-tag{font-size:10px;letter-spacing:.15em;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.12);padding:5px 12px;text-transform:uppercase}
+.proj-card-cta{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#000;padding:13px 28px;font-size:12px;letter-spacing:.12em;font-weight:700;text-decoration:none;transition:background .3s}
+.proj-card-cta:hover{background:var(--gold-light)}
+.proj-counter{position:absolute;bottom:10%;right:5%;font-size:12px;color:rgba(255,255,255,.3);letter-spacing:.2em}
+.proj-slide:nth-child(1) .proj-bg{background-image:url('arttech.jpg');background-size:cover;background-size:cover;background-position:center center;background-repeat:no-repeat;position:absolute;top:0;left:0;width:100%;height:100vh}
+.proj-slide:nth-child(2) .proj-bg{background-image:url('tarang.png');background-size:cover;background-size:cover;background-position:center center;background-repeat:no-repeat;position:absolute;top:0;left:0;width:100%;height:100vh}
+.proj-slide:nth-child(3) .proj-bg{background-image:url('bptp.jpg');background-size:cover;background-size:cover;background-position:center center;background-repeat:no-repeat;position:absolute;top:0;left:0;width:100%;height:100vh}
+.proj-slide:nth-child(4) .proj-bg{background-image:url('m3m.png');background-size:cover;background-size:cover;background-position:center center;background-repeat:no-repeat;position:absolute;top:0;left:0;width:100%;height:100vh}
+.proj-slide:nth-child(5) .proj-bg{background-image:url('navraj.png');background-size:cover;background-size:cover;background-position:center center;background-repeat:no-repeat;position:absolute;top:0;left:0;width:100%;height:100vh}
+.proj-slide:nth-child(6) .proj-bg{background-image:url('emrrald.jpg');background-size:cover;background-size:cover;background-position:center center;background-repeat:no-repeat;position:absolute;top:0;left:0;width:100%;height:100vh}
+.proj-slide:nth-child(7) .proj-bg{background-image:url('amolik.png');background-size:cover;background-size:cover;background-position:center center;background-repeat:no-repeat;position:absolute;top:0;left:0;width:100%;height:100vh}
+.proj-slide .proj-bg::after{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle at 25% 50%,rgba(201,168,76,.08) 0%,transparent 50%),
+    repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(201,168,76,.02) 41px)}
+
+/* WHY CHOOSE */
+#why{min-height:100vh;background:var(--off-white);padding:100px 7%;display:grid;grid-template-columns:1fr 1.6fr;gap:80px;align-items:start;position:relative;overflow:hidden}
+#why::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border-light),transparent)}
+.why-left{position:sticky;top:30vh}
+.why-left .section-badge{justify-content:flex-start}
+.why-left .section-title{text-align:left}
+.why-left .section-subtitle{text-align:left}
+.why-items{display:flex;flex-direction:column;gap:2px}
+.why-item{background:#fff;border:1px solid var(--border-light);padding:32px 36px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start;transition:border-color .3s,transform .3s;overflow:hidden}
+.why-item:hover{border-color:var(--gold);transform:translateX(4px)}
+.why-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--gold);opacity:.3;line-height:1}
+.why-text h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text-dark);margin-bottom:8px}
+.why-text p{font-size:14px;color:var(--text-muted);line-height:1.7}
+
+/* ABOUT */
+#about{height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.about-photo-col{position:relative;overflow:hidden}
+.about-photo-col img{width:100%;height:100%;object-fit:cover;object-position:center top;transform:scale(1.08);transition:transform 6s ease-out}
+.about-photo-col:hover img{transform:scale(1)}
+.about-photo-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(8,8,8,.1) 0%,rgba(8,8,8,.3) 100%)}
+.about-photo-frame{position:absolute;inset:24px;border:1px solid rgba(201,168,76,.25);pointer-events:none}
+.about-photo-badge{position:absolute;bottom:40px;left:40px;background:rgba(8,8,8,.85);backdrop-filter:blur(12px);border:1px solid rgba(201,168,76,.3);padding:18px 24px}
+.about-photo-badge-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff}
+.about-photo-badge-role{font-size:11px;letter-spacing:.2em;color:var(--gold);margin-top:4px;text-transform:uppercase}
+.about-text-col{background:#111;padding:80px 7%;display:flex;flex-direction:column;justify-content:center}
+.about-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.about-eyebrow span{font-size:10px;letter-spacing:.4em;color:var(--gold);font-weight:600;text-transform:uppercase}
+.about-eyebrow-line{width:30px;height:1px;background:var(--gold)}
+.about-title{font-family:'Playfair Display',serif;font-size:clamp(32px,3.5vw,52px);font-weight:700;color:#fff;line-height:1.15;margin-bottom:24px}
+.about-title em{color:var(--gold);font-style:italic}
+.about-body{font-size:15px;color:rgba(255,255,255,.55);line-height:1.8;margin-bottom:36px}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
+.about-stat-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--gold);line-height:1}
+.about-stat-num span{font-size:18px}
+.about-stat-label{font-size:11px;letter-spacing:.15em;color:rgba(255,255,255,.4);text-transform:uppercase;margin-top:6px}
+.about-cta{display:inline-flex;align-items:center;gap:12px;color:var(--gold);font-size:13px;letter-spacing:.12em;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:6px;transition:border-color .3s}
+.about-cta:hover{border-color:var(--gold)}
+
+/* REVIEWS */
+#reviews{min-height:100vh;background:var(--off-white);padding:100px 7%;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;width:100%}
+.review-card{background:#fff;border:1px solid var(--border-light);padding:44px 36px;display:flex;flex-direction:column;gap:20px;transition:border-color .3s,transform .3s}
+.review-card:hover{border-color:var(--gold);transform:translateY(-4px)}
+.review-stars{display:flex;gap:3px;color:var(--gold);font-size:16px}
+.review-text{font-family:'Playfair Display',serif;font-size:17px;font-style:italic;color:var(--text-dark);line-height:1.6;flex:1}
+.review-text::before{content:'\201C';font-size:48px;color:var(--gold);line-height:.5;display:block;margin-bottom:8px;opacity:.4}
+.review-author{display:flex;flex-direction:column;gap:4px;padding-top:20px;border-top:1px solid var(--border-light)}
+.review-name{font-size:14px;font-weight:600;color:var(--text-dark)}
+.review-loc{font-size:12px;color:var(--text-muted);letter-spacing:.08em}
+.reviews-rating{display:flex;align-items:center;gap:16px;margin-top:48px}
+.reviews-rating-num{font-family:'Playfair Display',serif;font-size:64px;font-weight:900;color:var(--text-dark);line-height:1}
+.reviews-rating-right{display:flex;flex-direction:column;gap:4px}
+.reviews-rating-stars{color:var(--gold);font-size:20px;letter-spacing:3px}
+.reviews-rating-label{font-size:12px;letter-spacing:.15em;color:var(--text-muted);text-transform:uppercase}
+
+/* CONTACT */
+#contact{min-height:100vh;background:var(--dark);padding:100px 7%;position:relative;overflow:hidden}
+#contact::before{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(ellipse at 80% 20%,rgba(201,168,76,.06) 0%,transparent 60%),
+    linear-gradient(rgba(201,168,76,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.03) 1px,transparent 1px);
+  background-size:100% 100%,60px 60px,60px 60px}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start;position:relative;z-index:1}
+.contact-left .section-badge{border-color:var(--border-dark)}
+.contact-left .section-badge span{color:var(--gold)}
+.contact-left .section-title{color:#fff;text-align:left}
+.contact-left .section-subtitle{color:rgba(255,255,255,.45);text-align:left}
+.office-cards{display:flex;flex-direction:column;gap:16px;margin-top:40px}
+.office-card{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.12);padding:28px 32px;transition:border-color .3s}
+.office-card:hover{border-color:rgba(201,168,76,.35)}
+.office-type{font-size:10px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.office-addr{font-size:14px;color:rgba(255,255,255,.65);line-height:1.6}
+.contact-ways{display:flex;flex-direction:column;gap:12px;margin-top:32px}
+.contact-way{display:flex;align-items:center;gap:14px;text-decoration:none;color:rgba(255,255,255,.6);font-size:14px;transition:color .3s}
+.contact-way:hover{color:var(--gold)}
+.contact-way-icon{width:40px;height:40px;border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;transition:border-color .3s}
+.contact-way:hover .contact-way-icon{border-color:var(--gold)}
+.contact-form{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.15);padding:48px 40px}
+.contact-form h3{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:32px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.form-group label{font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.4);text-transform:uppercase}
+.form-group input,.form-group select,.form-group textarea{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;padding:14px 16px;font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:border-color .3s;resize:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold)}
+.form-group select option{background:#1a1a1a;color:#fff}
+.form-submit{width:100%;background:var(--gold);color:#000;border:none;padding:16px;font-size:13px;letter-spacing:.15em;font-weight:700;cursor:pointer;transition:background .3s;font-family:'Inter',sans-serif;margin-top:8px}
+.form-submit:hover{background:var(--gold-light)}
+
+/* FOOTER */
+footer{background:#080808;border-top:1px solid rgba(201,168,76,.12);padding:60px 7% 40px}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:60px;margin-bottom:48px}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,.35);line-height:1.8;margin-top:16px;max-width:280px}
+.footer-col h4{font-size:11px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:20px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col ul li a{font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .3s}
+.footer-col ul li a:hover{color:rgba(255,255,255,.7)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:32px;display:flex;align-items:center;justify-content:space-between}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.2)}
+.footer-reg{font-size:12px;color:rgba(255,255,255,.2)}
+
+/* WHATSAPP FAB */
+#wa-fab{position:fixed;bottom:32px;right:32px;z-index:8500;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .3s,box-shadow .3s}
+#wa-fab:hover{transform:scale(1.1);box-shadow:0 8px 30px rgba(37,211,102,.5)}
+#wa-fab svg{width:28px;height:28px;fill:#fff}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .proj-card{width:90%;right:5%;top:auto;bottom:10%;transform:none}
+  #why{grid-template-columns:1fr;gap:48px}
+  .why-left{position:static}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  #about{grid-template-columns:1fr;height:auto;min-height:100vh}
+  .about-photo-col{height:50vh}
+  .about-text-col{padding:60px 5%}
+  .contact-grid{grid-template-columns:1fr}
+  .reviews-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  #stats{grid-template-columns:repeat(2,1fr)}
+  .partners-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-card{width:90%;right:5%;left:5%;bottom:8%;top:auto;transform:none;padding:28px 24px}
+  #cursor,#cursor-ring{display:none}
+  #projects-pin{height:auto !important;overflow:visible !important}
+  .projects-track{flex-direction:column !important;transform:none !important;height:auto !important}
+  .proj-slide{width:100% !important;flex:none !important;height:100vh !important}
+  .proj-num{font-size:80px}
+}
+@media(max-width:480px){
+  .hero-h1{font-size:40px}
+  .about-stats{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- PAGE LOADER -->
+<div id="loader">
+  <div id="loader-logo">
+    <img src="mainlogo.png" style="height:90px;width:auto;object-fit:contain;mix-blend-mode:multiply;">
+  </div>
+  <div>
+    <div id="loader-bar-wrap"><div id="loader-bar"></div></div>
+    <div id="loader-pct">0%</div>
+  </div>
+</div>
+
+<div id="progress"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="mainlogo.png" style="height:100px;width:auto;object-fit:contain;mix-blend-mode:multiply;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#projects-pin">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#partners">Partners</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:9813256644" class="nav-cta">+91 98132 56644</a>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div id="mobile-nav">
+  <button id="mobile-close">&#x2715;</button>
+  <a href="#projects-pin" onclick="closeMobileNav()">Projects</a>
+  <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="#partners" onclick="closeMobileNav()">Partners</a>
+  <a href="#reviews" onclick="closeMobileNav()">Reviews</a>
+  <a href="#contact" onclick="closeMobileNav()">Contact</a>
+  <a href="tel:9813256644" style="color:var(--gold);font-size:20px">+91 98132 56644</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div id="hero-slideshow" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;">
+    <img src="bptp.jpg" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center center;opacity:1;transition:opacity 1.5s ease-in-out;">
+    <img src="navraj.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center center;opacity:0;transition:opacity 1.5s ease-in-out;">
+    <img src="m3m.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center center;opacity:0;transition:opacity 1.5s ease-in-out;">
+  </div>
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow" id="heroEyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>Premium Real Estate</span>
+      <div class="hero-rating">
+        <div class="hero-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <span>5.0 Google Rating</span>
+      </div>
+    </div>
+    <h1 class="hero-h1" id="heroH1">
+      <div class="word"><div class="inner">Where</div></div>&nbsp;<div class="word"><div class="inner">Dreams</div></div><br>
+      <div class="word"><div class="inner">Find</div></div>&nbsp;<div class="word" style="color:var(--gold)"><div class="inner">Address.</div></div>
+    </h1>
+    <p class="hero-sub" id="heroSub">Curated luxury properties in Faridabad &amp; Palwal.<br>8 premium developers. 7 flagship projects. One trusted name.</p>
+    <div class="hero-btns" id="heroBtns">
+      <a href="#projects-pin" class="btn-gold">Explore Projects &#8594;</a>
+      <a href="https://wa.me/919813256644" target="_blank" class="btn-outline">WhatsApp Us</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stat-item">
+    <div class="stat-num"><span class="count" data-target="7">0</span><span>+</span></div>
+    <div class="stat-label">Active Projects</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num"><span class="count" data-target="8">0</span><span>+</span></div>
+    <div class="stat-label">Partner Developers</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num"><span class="count" data-target="500">0</span><span>+</span></div>
+    <div class="stat-label">Happy Families</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num"><span>5.0</span></div>
+    <div class="stat-label">Google Rating</div>
+  </div>
+</section>
+
+<!-- PROJECTS — PINNED HORIZONTAL SCROLL -->
+<div id="projects-pin">
+  <div class="projects-track">
+
+    <div class="proj-slide">
+      <div class="proj-bg"></div>
+      <div class="proj-overlay"></div>
+      <div class="proj-num">01</div>
+      <div class="proj-card">
+        <div class="proj-card-badge">Palwal &middot; Sector 6</div>
+        <h3 class="proj-card-title">Maulshree Greens</h3>
+        <div class="proj-card-loc">
+          <svg width="12" height="14" viewBox="0 0 12 14" fill="rgba(255,255,255,.5)"><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.75C5.035 6.75 4.25 5.965 4.25 5s.785-1.75 1.75-1.75S7.75 4.035 7.75 5 6.965 6.75 6 6.75z"/></svg>
+          Sector 6, Palwal
+        </div>
+        <div class="proj-card-tags">
+          <span class="proj-tag">Plots</span>
+          <span class="proj-tag">36–59 Lakhs</span>
+          <span class="proj-tag">By Arttech</span>
+        </div>
+        <a href="https://wa.me/919813256644?text=Hi%2C+I%27m+interested+in+Maulshree+Greens" target="_blank" class="proj-card-cta">Enquire Now &#8594;</a>
+      </div>
+      <div class="proj-counter">01 / 07</div>
+    </div>
+
+    <div class="proj-slide">
+      <div class="proj-bg"></div>
+      <div class="proj-overlay"></div>
+      <div class="proj-num">02</div>
+      <div class="proj-card">
+        <div class="proj-card-badge">Palwal &middot; Sector 7</div>
+        <h3 class="proj-card-title">Tarang City</h3>
+        <div class="proj-card-loc">
+          <svg width="12" height="14" viewBox="0 0 12 14" fill="rgba(255,255,255,.5)"><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.75C5.035 6.75 4.25 5.965 4.25 5s.785-1.75 1.75-1.75S7.75 4.035 7.75 5 6.965 6.75 6 6.75z"/></svg>
+          Sector 7, Palwal
+        </div>
+        <div class="proj-card-tags">
+          <span class="proj-tag">Plots</span>
+          <span class="proj-tag">Flats</span>
+          <span class="proj-tag">New Launch</span>
+        </div>
+        <a href="https://wa.me/919813256644?text=Hi%2C+I%27m+interested+in+Tarang+City" target="_blank" class="proj-card-cta">Enquire Now &#8594;</a>
+      </div>
+      <div class="proj-counter">02 / 07</div>
+    </div>
+
+    <div class="proj-slide">
+      <div class="proj-bg"></div>
+      <div class="proj-overlay"></div>
+      <div class="proj-num">03</div>
+      <div class="proj-card">
+        <div class="proj-card-badge">Faridabad</div>
+        <h3 class="proj-card-title">BPTP Projects</h3>
+        <div class="proj-card-loc">
+          <svg width="12" height="14" viewBox="0 0 12 14" fill="rgba(255,255,255,.5)"><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.75C5.035 6.75 4.25 5.965 4.25 5s.785-1.75 1.75-1.75S7.75 4.035 7.75 5 6.965 6.75 6 6.75z"/></svg>
+          Faridabad, Haryana
+        </div>
+        <div class="proj-card-tags">
+          <span class="proj-tag">Apartments</span>
+          <span class="proj-tag">Floors</span>
+          <span class="proj-tag">Premium</span>
+        </div>
+        <a href="https://wa.me/919813256644?text=Hi%2C+I%27m+interested+in+BPTP+Projects" target="_blank" class="proj-card-cta">Enquire Now &#8594;</a>
+      </div>
+      <div class="proj-counter">03 / 07</div>
+    </div>
+
+    <div class="proj-slide">
+      <div class="proj-bg"></div>
+      <div class="proj-overlay"></div>
+      <div class="proj-num">04</div>
+      <div class="proj-card">
+        <div class="proj-card-badge">Faridabad</div>
+        <h3 class="proj-card-title">M3M Projects</h3>
+        <div class="proj-card-loc">
+          <svg width="12" height="14" viewBox="0 0 12 14" fill="rgba(255,255,255,.5)"><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.75C5.035 6.75 4.25 5.965 4.25 5s.785-1.75 1.75-1.75S7.75 4.035 7.75 5 6.965 6.75 6 6.75z"/></svg>
+          Faridabad, Haryana
+        </div>
+        <div class="proj-card-tags">
+          <span class="proj-tag">Luxury</span>
+          <span class="proj-tag">3 BHK</span>
+          <span class="proj-tag">4 BHK</span>
+        </div>
+        <a href="https://wa.me/919813256644?text=Hi%2C+I%27m+interested+in+M3M+Projects" target="_blank" class="proj-card-cta">Enquire Now &#8594;</a>
+      </div>
+      <div class="proj-counter">04 / 07</div>
+    </div>
+
+    <div class="proj-slide">
+      <div class="proj-bg"></div>
+      <div class="proj-overlay"></div>
+      <div class="proj-num">05</div>
+      <div class="proj-card">
+        <div class="proj-card-badge">Faridabad</div>
+        <h3 class="proj-card-title">Navraj Projects</h3>
+        <div class="proj-card-loc">
+          <svg width="12" height="14" viewBox="0 0 12 14" fill="rgba(255,255,255,.5)"><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.75C5.035 6.75 4.25 5.965 4.25 5s.785-1.75 1.75-1.75S7.75 4.035 7.75 5 6.965 6.75 6 6.75z"/></svg>
+          Faridabad, Haryana
+        </div>
+        <div class="proj-card-tags">
+          <span class="proj-tag">Premium</span>
+          <span class="proj-tag">Plots</span>
+          <span class="proj-tag">Floors</span>
+        </div>
+        <a href="https://wa.me/919813256644?text=Hi%2C+I%27m+interested+in+Navraj+Projects" target="_blank" class="proj-card-cta">Enquire Now &#8594;</a>
+      </div>
+      <div class="proj-counter">05 / 07</div>
+    </div>
+
+    <div class="proj-slide">
+      <div class="proj-bg"></div>
+      <div class="proj-overlay"></div>
+      <div class="proj-num">06</div>
+      <div class="proj-card">
+        <div class="proj-card-badge">Faridabad</div>
+        <h3 class="proj-card-title">Emerald Group</h3>
+        <div class="proj-card-loc">
+          <svg width="12" height="14" viewBox="0 0 12 14" fill="rgba(255,255,255,.5)"><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.75C5.035 6.75 4.25 5.965 4.25 5s.785-1.75 1.75-1.75S7.75 4.035 7.75 5 6.965 6.75 6 6.75z"/></svg>
+          Faridabad, Haryana
+        </div>
+        <div class="proj-card-tags">
+          <span class="proj-tag">Residential</span>
+          <span class="proj-tag">Premium</span>
+        </div>
+        <a href="https://wa.me/919813256644?text=Hi%2C+I%27m+interested+in+Emerald+Group" target="_blank" class="proj-card-cta">Enquire Now &#8594;</a>
+      </div>
+      <div class="proj-counter">06 / 07</div>
+    </div>
+
+    <div class="proj-slide">
+      <div class="proj-bg"></div>
+      <div class="proj-overlay"></div>
+      <div class="proj-num">07</div>
+      <div class="proj-card">
+        <div class="proj-card-badge">Faridabad &middot; Sector 88</div>
+        <h3 class="proj-card-title">Amolik Projects</h3>
+        <div class="proj-card-loc">
+          <svg width="12" height="14" viewBox="0 0 12 14" fill="rgba(255,255,255,.5)"><path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.75C5.035 6.75 4.25 5.965 4.25 5s.785-1.75 1.75-1.75S7.75 4.035 7.75 5 6.965 6.75 6 6.75z"/></svg>
+          Sector 88, Faridabad
+        </div>
+        <div class="proj-card-tags">
+          <span class="proj-tag">Plots</span>
+          <span class="proj-tag">Flats</span>
+          <span class="proj-tag">Ready to Move</span>
+        </div>
+        <a href="https://wa.me/919813256644?text=Hi%2C+I%27m+interested+in+Amolik+Projects" target="_blank" class="proj-card-cta">Enquire Now &#8594;</a>
+      </div>
+      <div class="proj-counter">07 / 07</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PARTNERS -->
+<section id="partners">
+  <div class="section-badge"><span>Trusted Developers</span></div>
+  <h2 class="section-title">Our Partner Network</h2>
+  <p class="section-subtitle">We collaborate with Haryana's most trusted developers to bring you verified, premium properties.</p>
+  <div class="partners-grid">
+    <div class="partner-cell">
+      <img src="bptplogo.png" style="width:80px;height:50px;object-fit:contain;">
+      <div class="partner-name">BPTP</div>
+      <div class="partner-type">Township Developer</div>
+    </div>
+    <div class="partner-cell">
+      <img src="m3mlogo.png" style="width:80px;height:50px;object-fit:contain;">
+      <div class="partner-name">M3M</div>
+      <div class="partner-type">Luxury Residences</div>
+    </div>
+    <div class="partner-cell">
+      <img src="navrajlogo.png" style="width:80px;height:50px;object-fit:contain;">
+      <div class="partner-name">Navraj</div>
+      <div class="partner-type">Premium Projects</div>
+    </div>
+    <div class="partner-cell">
+      <img src="emeraldlogo.png" style="width:80px;height:50px;object-fit:contain;">
+      <div class="partner-name">Emerald Group</div>
+      <div class="partner-type">Faridabad</div>
+    </div>
+    <div class="partner-cell">
+      <img src="arttechlogo.png" style="width:80px;height:50px;object-fit:contain;">
+      <div class="partner-name">Arttech</div>
+      <div class="partner-type">Plots &amp; Villas</div>
+    </div>
+    <div class="partner-cell">
+      <img src="taranglogo.png" style="width:80px;height:50px;object-fit:contain;">
+      <div class="partner-name">Tarang City</div>
+      <div class="partner-type">Palwal Sector 7</div>
+    </div>
+    <div class="partner-cell">
+      <img src="amoliklogo.png" style="width:80px;height:50px;object-fit:contain;">
+      <div class="partner-name">Amolik</div>
+      <div class="partner-type">Faridabad Projects</div>
+    </div>
+    <div class="partner-cell">
+      <div class="partner-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 18l8-16 8 16" stroke="#C9A84C" stroke-width="1.5" fill="none"/><path d="M5 12h10" stroke="#C9A84C" stroke-width="1.5"/></svg>
+      </div>
+      <div class="partner-name">Rasa</div>
+      <div class="partner-type">Premium Living</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE OSR -->
+<section id="why">
+  <div class="why-left">
+    <div class="section-badge"><span>Why OSR</span></div>
+    <h2 class="section-title" style="color:var(--text-dark)">The OSR<br><em style="color:var(--gold);font-style:italic">Difference</em></h2>
+    <p class="section-subtitle">In a market crowded with promises, we deliver clarity, trust, and results.</p>
+  </div>
+  <div class="why-items">
+    <div class="why-item">
+      <div class="why-num">01</div>
+      <div class="why-text">
+        <h3>Verified Inventory Only</h3>
+        <p>Every property we list has been personally verified for legal clearance, RERA compliance, and developer credibility. No surprises, no hidden issues.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">02</div>
+      <div class="why-text">
+        <h3>End-to-End Support</h3>
+        <p>From site visits to loan assistance, paperwork, registration, and possession — we walk with you through every step of your real estate journey.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">03</div>
+      <div class="why-text">
+        <h3>Local Market Expertise</h3>
+        <p>Deep roots in Faridabad and Palwal real estate. We know which sectors are appreciating, which developers deliver on time, and where the best value lies.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">04</div>
+      <div class="why-text">
+        <h3>5.0 Google Rating</h3>
+        <p>Every review earned. Our 5-star reputation reflects honest advice, transparent dealings, and genuine care for our clients' long-term investment.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">05</div>
+      <div class="why-text">
+        <h3>8 Premium Developer Partners</h3>
+        <p>Exclusive tie-ups with BPTP, SRS, Omaxe, Puri, Ansal, Tarang City, Countrywide, and Imperia — giving you access to the best projects first.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-photo-col" id="aboutPhoto">
+    <img src="owner.jpg" alt="Vikram Singh — Founder, OSR Realtors">
+    <div class="about-photo-overlay"></div>
+    <div class="about-photo-frame"></div>
+    <div class="about-photo-badge">
+      <div class="about-photo-badge-name">Vikram Singh</div>
+      <div class="about-photo-badge-role">Founder &middot; OSR Realtors</div>
+    </div>
+  </div>
+  <div class="about-text-col" id="aboutText">
+    <div class="about-eyebrow">
+      <div class="about-eyebrow-line"></div>
+      <span>The Man Behind OSR</span>
+    </div>
+    <h2 class="about-title">Building Trust,<br><em>One Home</em><br>at a Time</h2>
+    <p class="about-body">Vikram Singh founded OSR Realtors with a single vision — to make premium real estate accessible, honest, and stress-free. With years of experience in the Faridabad and Palwal property markets, he has guided hundreds of families to their dream homes through verified listings, personalised counsel, and relentless follow-through.</p>
+    <div class="about-stats">
+      <div>
+        <div class="about-stat-num">7<span>+</span></div>
+        <div class="about-stat-label">Projects</div>
+      </div>
+      <div>
+        <div class="about-stat-num">8<span>+</span></div>
+        <div class="about-stat-label">Partners</div>
+      </div>
+      <div>
+        <div class="about-stat-num">5.0<span>&#9733;</span></div>
+        <div class="about-stat-label">Google</div>
+      </div>
+    </div>
+    <a href="tel:9813256644" class="about-cta">Call Vikram Singh Directly &#8594;</a>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="section-badge"><span>Client Stories</span></div>
+  <h2 class="section-title">Trusted by Families</h2>
+  <p class="section-subtitle" style="margin-bottom:56px">Real experiences from real clients who found their home through OSR Realtors.</p>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="review-text">Vikram ji helped us find the perfect 3 BHK in Sector 88. His knowledge of the area, honesty about pricing, and patience throughout the process was remarkable. We got possession within the promised timeline.</div>
+      <div class="review-author">
+        <div class="review-name">Rajesh Sharma</div>
+        <div class="review-loc">Sector 88, Faridabad</div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="review-text">We were confused between multiple projects. OSR Realtors gave us a clear comparison without any sales pressure. They helped us choose Tarang City in Palwal and it's been a wonderful investment. 5 stars without any doubt.</div>
+      <div class="review-author">
+        <div class="review-name">Sunita &amp; Amit Gupta</div>
+        <div class="review-loc">Palwal, Haryana</div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="review-text">From loan guidance to registration, the OSR team handled everything. Vikram Sir's dedication and local expertise is unmatched. We purchased our plot through them and the entire experience was smooth and trustworthy.</div>
+      <div class="review-author">
+        <div class="review-name">Deepak Verma</div>
+        <div class="review-loc">Faridabad, Haryana</div>
+      </div>
+    </div>
+  </div>
+  <div class="reviews-rating">
+    <div class="reviews-rating-num">5.0</div>
+    <div class="reviews-rating-right">
+      <div class="reviews-rating-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="reviews-rating-label">Google Rating &middot; 100% Verified Reviews</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-left">
+      <div class="section-badge"><span>Get in Touch</span></div>
+      <h2 class="section-title">Let's Find Your<br>Dream Property</h2>
+      <p class="section-subtitle">Visit our office or reach us anytime. Available 7 days a week.</p>
+      <div class="office-cards">
+        <div class="office-card">
+          <div class="office-type">Head Office</div>
+          <div class="office-addr">Shop No. 11-12, Near SRS Residency,<br>Amolik Chowk, Sector 88,<br>Faridabad, Haryana</div>
+        </div>
+        <div class="office-card">
+          <div class="office-type">Branch Office</div>
+          <div class="office-addr">Shop No. 43, Tarang City,<br>Sector 7, Palwal,<br>Haryana</div>
+        </div>
+      </div>
+      <div class="contact-ways">
+        <a href="tel:9813256644" class="contact-way">
+          <div class="contact-way-icon">&#128222;</div>
+          +91 98132 56644
+        </a>
+        <a href="https://wa.me/919813256644" target="_blank" class="contact-way">
+          <div class="contact-way-icon">&#128172;</div>
+          WhatsApp: +91 98132 56644
+        </a>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3>Request a Callback</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="fname" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="fphone" placeholder="+91 XXXXX XXXXX">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Interested In</label>
+        <select id="fproject">
+          <option value="">Select a project or type</option>
+          <option>SRS Residency — Sector 88</option>
+          <option>BPTP Park Elite Floors</option>
+          <option>Tarang City, Palwal</option>
+          <option>Omaxe Grand</option>
+          <option>Puri Emerald Bay</option>
+          <option>Ansal Sushant City</option>
+          <option>Imperia Esfera</option>
+          <option>Any Available Property</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Budget Range</label>
+        <select id="fbudget">
+          <option value="">Select budget</option>
+          <option>Under &#8377;30 Lakhs</option>
+          <option>&#8377;30&#8211;50 Lakhs</option>
+          <option>&#8377;50&#8211;80 Lakhs</option>
+          <option>&#8377;80 Lakhs &#8211; 1 Crore</option>
+          <option>Above &#8377;1 Crore</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message (Optional)</label>
+        <textarea id="fmsg" rows="3" placeholder="Any specific requirements..."></textarea>
+      </div>
+      <button class="form-submit" onclick="handleSubmit()">SEND ENQUIRY VIA WHATSAPP</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="mainlogo.png" style="height:64px;width:auto;object-fit:contain;mix-blend-mode:multiply;">
+      <p>Premium real estate services in Faridabad &amp; Palwal. Your trusted partner for verified properties, transparent dealings, and lifelong relationships.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#projects-pin">Our Projects</a></li>
+        <li><a href="#about">About Vikram Singh</a></li>
+        <li><a href="#partners">Partner Developers</a></li>
+        <li><a href="#reviews">Client Reviews</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:9813256644">+91 98132 56644</a></li>
+        <li><a href="https://wa.me/919813256644" target="_blank">WhatsApp</a></li>
+        <li><a href="#">Sector 88, Faridabad</a></li>
+        <li><a href="#">Sector 7, Palwal</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&#169; 2024 OSR Realtors. All rights reserved.</div>
+    <div class="footer-reg">RERA Registered | Haryana Real Estate</div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a id="wa-fab" href="https://wa.me/919813256644" target="_blank" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+/* PAGE LOADER */
+(function(){
+  const bar = document.getElementById('loader-bar');
+  const pct = document.getElementById('loader-pct');
+  const logo = document.getElementById('loader-logo');
+  const loader = document.getElementById('loader');
+  gsap.to(logo, {opacity:1, y:0, duration:.8, ease:'expo.out', delay:.2});
+  let p = 0;
+  const iv = setInterval(function(){
+    p = Math.min(p + Math.random()*18, 100);
+    bar.style.width = p + '%';
+    pct.textContent = Math.floor(p) + '%';
+    if(p >= 100){
+      clearInterval(iv);
+      setTimeout(function(){
+        gsap.to(loader, {opacity:0, duration:.6, ease:'power2.in', onComplete:function(){
+          loader.style.display='none';
+          initAnimations();
+        }});
+      }, 300);
+    }
+  }, 80);
+})();
+
+/* CURSOR */
+var cur = document.getElementById('cursor');
+var ring = document.getElementById('cursor-ring');
+if(cur && ring){
+  window.addEventListener('mousemove', function(e){
+    gsap.set(cur, {x:e.clientX, y:e.clientY});
+    gsap.to(ring, {x:e.clientX, y:e.clientY, duration:.12, ease:'power2.out'});
+  });
+  document.querySelectorAll('a,button,.partner-cell,.review-card').forEach(function(el){
+    el.addEventListener('mouseenter',function(){
+      gsap.to(cur, {width:6, height:6, background:'#fff', duration:.2});
+      gsap.to(ring, {width:56, height:56, borderColor:'rgba(201,168,76,.8)', duration:.2});
+    });
+    el.addEventListener('mouseleave',function(){
+      gsap.to(cur, {width:10, height:10, background:'#C9A84C', duration:.2});
+      gsap.to(ring, {width:38, height:38, borderColor:'rgba(201,168,76,.5)', duration:.2});
+    });
+  });
+}
+
+/* SCROLL PROGRESS */
+window.addEventListener('scroll', function(){
+  var scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('progress').style.width = scrolled + '%';
+});
+
+/* NAVBAR */
+window.addEventListener('scroll', function(){
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* HAMBURGER */
+document.getElementById('hamburger').addEventListener('click', function(){
+  document.getElementById('mobile-nav').classList.add('open');
+});
+document.getElementById('mobile-close').addEventListener('click', function(){
+  document.getElementById('mobile-nav').classList.remove('open');
+});
+function closeMobileNav(){ document.getElementById('mobile-nav').classList.remove('open'); }
+
+function initAnimations(){
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* HERO */
+  gsap.to('#heroEyebrow', {opacity:1, y:0, duration:1, ease:'expo.out', delay:.1});
+  document.querySelectorAll('.hero-h1 .inner').forEach(function(el,i){
+    gsap.to(el, {y:'0%', duration:1.1, ease:'expo.out', delay:.2 + i*.12});
+  });
+  gsap.to('#heroSub', {opacity:1, y:0, duration:1, ease:'expo.out', delay:.7});
+  gsap.to('#heroBtns', {opacity:1, y:0, duration:1, ease:'expo.out', delay:.9});
+
+  /* STATS COUNT-UP */
+  document.querySelectorAll('.count').forEach(function(el){
+    var target = +el.dataset.target;
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 85%',
+      once: true,
+      onEnter: function(){
+        gsap.to({val:0}, {val:target, duration:2, ease:'power2.out',
+          onUpdate: function(){ el.textContent = Math.round(this.targets()[0].val); }
+        });
+      }
+    });
+  });
+
+  /* PARTNERS */
+  gsap.from('.partner-cell', {
+    opacity:0, y:40, stagger:.08, duration:.8, ease:'expo.out',
+    scrollTrigger:{trigger:'#partners', start:'top 70%'}
+  });
+
+  /* HORIZONTAL SCROLL — PROJECTS */
+  if(window.innerWidth > 768) {
+    var track = document.querySelector('.projects-track');
+    var scrollDist = function(){ return track.scrollWidth - window.innerWidth; };
+
+    var hTween = gsap.to(track, {
+      x: function(){ return -scrollDist(); },
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#projects-pin',
+        pin: true,
+        scrub: 1.5,
+        end: function(){ return '+=' + scrollDist(); },
+        invalidateOnRefresh: true
+      }
+    });
+
+    document.querySelectorAll('.proj-card').forEach(function(card){
+      gsap.fromTo(card,
+        {opacity:0, x:60},
+        {opacity:1, x:0, duration:1, ease:'expo.out',
+         scrollTrigger:{
+           trigger: card,
+           containerAnimation: hTween,
+           start: 'left 80%',
+           toggleActions: 'play none none reverse'
+         }
+        }
+      );
+    });
+  }
+
+  /* WHY ITEMS */
+  gsap.from('.why-item', {
+    opacity:0, x:60, stagger:.12, duration:.9, ease:'expo.out',
+    scrollTrigger:{trigger:'.why-items', start:'top 75%'}
+  });
+
+  /* ABOUT SPLIT */
+  var aboutTL = gsap.timeline({
+    scrollTrigger:{trigger:'#about', start:'top 65%', toggleActions:'play none none reverse'}
+  });
+  aboutTL
+    .fromTo('#aboutPhoto', {clipPath:'inset(0 0 100% 0)'}, {clipPath:'inset(0 0 0% 0)', duration:1.2, ease:'expo.out'})
+    .fromTo('#aboutText', {opacity:0, x:60}, {opacity:1, x:0, duration:1, ease:'expo.out'}, '-=.8');
+
+  /* REVIEWS */
+  gsap.from('.review-card', {
+    opacity:0, y:50, stagger:.15, duration:.9, ease:'expo.out',
+    scrollTrigger:{trigger:'.reviews-grid', start:'top 75%'}
+  });
+
+  /* CONTACT */
+  gsap.from('.contact-grid > *', {
+    opacity:0, y:40, stagger:.2, duration:.9, ease:'expo.out',
+    scrollTrigger:{trigger:'#contact', start:'top 70%'}
+  });
+
+  /* SECTION TITLES */
+  document.querySelectorAll('.section-title').forEach(function(el){
+    gsap.from(el, {
+      opacity:0, y:40, duration:.9, ease:'expo.out',
+      scrollTrigger:{trigger:el, start:'top 80%', toggleActions:'play none none reverse'}
+    });
+  });
+}
+
+/* HERO SLIDESHOW */
+(function(){
+  var imgs = document.querySelectorAll('#hero-slideshow img');
+  var current = 0;
+  setInterval(function(){
+    imgs[current].style.opacity = '0';
+    current = (current + 1) % imgs.length;
+    imgs[current].style.opacity = '1';
+  }, 2500);
+})();
+
+/* FORM SUBMIT */
+function handleSubmit(){
+  var name = document.getElementById('fname').value.trim();
+  var phone = document.getElementById('fphone').value.trim();
+  var project = document.getElementById('fproject').value;
+  var budget = document.getElementById('fbudget').value;
+  var msg = document.getElementById('fmsg').value.trim();
+  if(!name || !phone){alert('Please enter your name and phone number.');return;}
+  var text = encodeURIComponent(
+    'Hello OSR Realtors!\n\nName: ' + name +
+    '\nPhone: ' + phone +
+    '\nInterested In: ' + (project||'Not specified') +
+    '\nBudget: ' + (budget||'Not specified') +
+    (msg ? '\nMessage: ' + msg : '') +
+    '\n\nPlease get in touch.'
+  );
+  window.open('https://wa.me/919813256644?text=' + text, '_blank');
+}
+</script>
+</body>
+</html>

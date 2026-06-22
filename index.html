@@ -81,10 +81,11 @@ body{font-family:'Inter',sans-serif;background:#080808;color:#fff;overflow-x:hid
 
 /* STATS BAR */
 #stats{background:var(--off-white);padding:40px 0;overflow:hidden;position:relative}
-.stats-track{display:flex;gap:0;animation:statsScroll 20s linear infinite;width:max-content}
+.stats-track{display:flex;gap:0;animation:statsScroll 28s linear infinite;width:max-content;align-items:center}
 .stats-track:hover{animation-play-state:paused}
 @keyframes statsScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.stat-item{flex:0 0 300px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px 40px;background:#fff;border-right:1px solid var(--border-light);position:relative}
+.stat-item{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px 100px;background:#fff;position:relative}
+.stat-item::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);height:40px;width:1px;background:var(--gold);opacity:0.45}
 .stat-num{font-family:'Playfair Display',serif;font-size:clamp(40px,4vw,60px);font-weight:900;color:var(--text-dark);line-height:1;margin-bottom:10px}
 .stat-num span{color:var(--gold)}
 .stat-label{font-size:12px;letter-spacing:.2em;color:var(--text-muted);text-transform:uppercase;font-weight:500}

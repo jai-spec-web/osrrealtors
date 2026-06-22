@@ -141,12 +141,36 @@ body{font-family:'Inter',sans-serif;background:#080808;color:#fff;overflow-x:hid
 .why-left .section-badge{justify-content:flex-start}
 .why-left .section-title{text-align:left}
 .why-left .section-subtitle{text-align:left}
-.why-items{display:flex;flex-direction:column;gap:2px}
-.why-item{background:#fff;border:1px solid var(--border-light);padding:32px 36px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start;transition:border-color .3s,transform .3s;overflow:hidden}
-.why-item:hover{border-color:var(--gold);transform:translateX(4px)}
-.why-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--gold);opacity:.3;line-height:1}
+.why-items{display:flex;flex-direction:column;gap:16px;perspective:1000px}
+.why-item{
+  background:#fff;
+  border-left:3px solid var(--gold);
+  border-top:1px solid var(--border-light);
+  border-right:1px solid var(--border-light);
+  border-bottom:1px solid var(--border-light);
+  padding:32px 36px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:24px;
+  align-items:start;
+  position:relative;
+  overflow:hidden;
+  transition:transform .4s cubic-bezier(.25,.46,.45,.94),box-shadow .4s cubic-bezier(.25,.46,.45,.94);
+  opacity:0;
+  transform:translateY(80px) rotateX(20deg);
+  filter:blur(8px);
+}
+.why-item.why-visible{
+  opacity:1;
+  transform:translateY(0) rotateX(0);
+  filter:blur(0);
+  transition:opacity .8s cubic-bezier(.25,.46,.45,.94),transform .8s cubic-bezier(.25,.46,.45,.94),filter .8s cubic-bezier(.25,.46,.45,.94),box-shadow .4s ease;
+}
+.why-item:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(201,168,76,.15),0 4px 16px rgba(0,0,0,.06)}
+.why-num{font-family:'Playfair Display',serif;font-size:72px;font-weight:900;color:var(--gold);opacity:.12;line-height:1;position:absolute;right:24px;top:50%;transform:translateY(-50%);pointer-events:none;user-select:none}
 .why-text h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text-dark);margin-bottom:8px}
 .why-text p{font-size:14px;color:var(--text-muted);line-height:1.7}
+.why-icon{width:48px;height:48px;border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--gold)}
 
 /* ABOUT */
 #about{height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
@@ -615,39 +639,44 @@ footer{background:#080808;border-top:1px solid rgba(201,168,76,.12);padding:60px
   </div>
   <div class="why-items">
     <div class="why-item">
-      <div class="why-num">01</div>
+      <div class="why-icon">01</div>
       <div class="why-text">
         <h3>Verified Inventory Only</h3>
         <p>Every property we list has been personally verified for legal clearance, RERA compliance, and developer credibility. No surprises, no hidden issues.</p>
       </div>
+      <div class="why-num">01</div>
     </div>
     <div class="why-item">
-      <div class="why-num">02</div>
+      <div class="why-icon">02</div>
       <div class="why-text">
         <h3>End-to-End Support</h3>
         <p>From site visits to loan assistance, paperwork, registration, and possession — we walk with you through every step of your real estate journey.</p>
       </div>
+      <div class="why-num">02</div>
     </div>
     <div class="why-item">
-      <div class="why-num">03</div>
+      <div class="why-icon">03</div>
       <div class="why-text">
         <h3>Local Market Expertise</h3>
         <p>Deep roots in Faridabad and Palwal real estate. We know which sectors are appreciating, which developers deliver on time, and where the best value lies.</p>
       </div>
+      <div class="why-num">03</div>
     </div>
     <div class="why-item">
-      <div class="why-num">04</div>
+      <div class="why-icon">04</div>
       <div class="why-text">
         <h3>5.0 Google Rating</h3>
         <p>Every review earned. Our 5-star reputation reflects honest advice, transparent dealings, and genuine care for our clients' long-term investment.</p>
       </div>
+      <div class="why-num">04</div>
     </div>
     <div class="why-item">
-      <div class="why-num">05</div>
+      <div class="why-icon">05</div>
       <div class="why-text">
         <h3>8 Premium Developer Partners</h3>
-        <p>Exclusive tie-ups with BPTP, SRS, Omaxe, Puri, Ansal, Tarang City, Countrywide, and Imperia — giving you access to the best projects first.</p>
+        <p>Exclusive tie-ups with BPTP, M3M, Navraj, Arttech, Emerald Group, Tarang City, Rasa, and Amolik — giving you access to the best projects first.</p>
       </div>
+      <div class="why-num">05</div>
     </div>
   </div>
 </section>
@@ -936,11 +965,21 @@ function initAnimations(){
     });
   }
 
-  /* WHY ITEMS */
-  gsap.from('.why-item', {
-    opacity:0, x:60, stagger:.12, duration:.9, ease:'expo.out',
-    scrollTrigger:{trigger:'.why-items', start:'top 75%'}
-  });
+  /* WHY ITEMS — IntersectionObserver cinematic reveal */
+  var whyItems = document.querySelectorAll('.why-item');
+  var whyObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        var el = entry.target;
+        var idx = Array.from(whyItems).indexOf(el);
+        setTimeout(function(){
+          el.classList.add('why-visible');
+        }, idx * 100);
+        whyObserver.unobserve(el);
+      }
+    });
+  }, {threshold: 0.15});
+  whyItems.forEach(function(item){ whyObserver.observe(item); });
 
   /* ABOUT SPLIT */
   var aboutTL = gsap.timeline({

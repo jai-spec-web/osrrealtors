@@ -377,8 +377,9 @@ footer{background:#080808;border-top:1px solid rgba(201,168,76,.12);padding:60px
 </section>
 
 <!-- STATS -->
-<section id="stats">
-  <div class="stats-track">
+<section id="stats" style="position:relative;">
+  <canvas id="canvas-coin" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0;opacity:0;transition:opacity 1s;"></canvas>
+  <div class="stats-track" style="position:relative;z-index:1;">
     <div class="stat-item"><div class="stat-num"><span>7</span><span>+</span></div><div class="stat-label">Active Projects</div></div>
     <div class="stat-item"><div class="stat-num"><span>8</span><span>+</span></div><div class="stat-label">Partner Developers</div></div>
     <div class="stat-item"><div class="stat-num"><span>10,000</span><span>+</span></div><div class="stat-label">Happy Families</div></div>
@@ -595,7 +596,8 @@ footer{background:#080808;border-top:1px solid rgba(201,168,76,.12);padding:60px
 </section>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" style="position:relative;">
+  <canvas id="canvas-house" style="position:absolute;right:5%;top:50%;transform:translateY(-50%);pointer-events:none;z-index:0;opacity:0;transition:opacity 1.2s;"></canvas>
   <div class="about-photo-col" id="aboutPhoto">
     <img src="owner.jpg" alt="Vikram Singh — Founder, OSR Realtors">
     <div class="about-photo-overlay"></div>
@@ -631,8 +633,9 @@ footer{background:#080808;border-top:1px solid rgba(201,168,76,.12);padding:60px
 </section>
 
 <!-- WHY CHOOSE OSR -->
-<section id="why">
-  <div class="why-left">
+<section id="why" style="position:relative;">
+  <canvas id="canvas-key" style="position:absolute;left:0;top:50%;transform:translateY(-50%);pointer-events:none;z-index:0;opacity:0;transition:opacity 1.2s;"></canvas>
+  <div class="why-left" style="position:relative;z-index:1;">
     <div class="section-badge"><span>Why OSR</span></div>
     <h2 class="section-title" style="color:var(--text-dark)">The OSR<br><em style="color:var(--gold);font-style:italic">Difference</em></h2>
     <p class="section-subtitle">In a market crowded with promises, we deliver clarity, trust, and results.</p>
@@ -765,13 +768,13 @@ footer{background:#080808;border-top:1px solid rgba(201,168,76,.12);padding:60px
         <label>Interested In</label>
         <select id="fproject">
           <option value="">Select a project or type</option>
-          <option>SRS Residency — Sector 88</option>
-          <option>BPTP Park Elite Floors</option>
-          <option>Tarang City, Palwal</option>
-          <option>Omaxe Grand</option>
-          <option>Puri Emerald Bay</option>
-          <option>Ansal Sushant City</option>
-          <option>Imperia Esfera</option>
+          <option>Maulshree Greens — Sector 6 Palwal</option>
+          <option>Tarang City — Sector 7 Palwal</option>
+          <option>BPTP Projects — Faridabad</option>
+          <option>M3M Projects — Faridabad</option>
+          <option>Navraj Projects — Faridabad</option>
+          <option>Emerald Group — Faridabad</option>
+          <option>Amolik Projects — Sector 88 Faridabad</option>
           <option>Any Available Property</option>
         </select>
       </div>
@@ -833,6 +836,8 @@ footer{background:#080808;border-top:1px solid rgba(201,168,76,.12);padding:60px
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
+<!-- THREE.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -1019,6 +1024,149 @@ function initAnimations(){
     current = (current + 1) % imgs.length;
     imgs[current].style.opacity = '1';
   }, 2500);
+})();
+
+/* THREE.JS 3D SCENES */
+(function(){
+  if(typeof THREE === 'undefined'){ console.warn('Three.js not loaded'); return; }
+  var isMobile = window.innerWidth < 768;
+  var GOLD = 0xc9a84c, GOLD_LIGHT = 0xf0d080, GOLD_DARK = 0xa07830;
+
+  function goldMat(emissive,emInt){
+    return new THREE.MeshStandardMaterial({color:GOLD,metalness:0.85,roughness:0.15,emissive:emissive||0x3a2800,emissiveIntensity:emInt||0.5});
+  }
+  function addLights(scene){
+    scene.add(new THREE.AmbientLight(0xffffff, 3));
+    var d=new THREE.DirectionalLight(0xffd700, 5); d.position.set(5,8,5); scene.add(d);
+    var d2=new THREE.DirectionalLight(0xffd700, 5); d2.position.set(-5,2,-5); scene.add(d2);
+    var p=new THREE.PointLight(0xffd700, 2, 50); p.position.set(5,5,5); scene.add(p);
+    var p2=new THREE.PointLight(0xffeedd, 2, 30); p2.position.set(-3,3,8); scene.add(p2);
+  }
+
+  /* ---- 2. COIN SCENE ---- */
+  (function(){
+    var canvas=document.getElementById('canvas-coin'); if(!canvas){ console.warn('canvas-coin not found'); return; }
+    var SZ=isMobile?200:320;
+    var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setClearColor(0x000000,0);
+    renderer.setSize(SZ,SZ);
+    canvas.style.width=SZ+'px'; canvas.style.height=SZ+'px';
+    var scene=new THREE.Scene();
+    var camera=new THREE.PerspectiveCamera(45,1,0.1,100);
+    camera.position.set(0,0,6);
+    addLights(scene);
+
+    var coin=new THREE.Mesh(new THREE.CylinderGeometry(2,2,0.3,64),goldMat(0x5a3200,0.6));
+    var edge=new THREE.Mesh(new THREE.TorusGeometry(2,0.1,8,64),new THREE.MeshStandardMaterial({color:GOLD_DARK,metalness:0.95,roughness:0.05,emissive:0x3a1800,emissiveIntensity:0.4}));
+    edge.rotation.x=Math.PI/2; coin.add(edge);
+    coin.position.y=-6;
+    scene.add(coin);
+    canvas.style.opacity='0.25';
+    console.log('Scene 2 (Coin) initialized');
+
+    var visible=false;
+    new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting){ visible=true; }
+    },{threshold:0.1}).observe(document.getElementById('stats'));
+
+    (function loop(){
+      requestAnimationFrame(loop);
+      coin.rotation.y+=0.014;
+      coin.rotation.x=0.25;
+      if(visible && coin.position.y<0){ coin.position.y=Math.min(coin.position.y+0.1,0); }
+      renderer.render(scene,camera);
+    })();
+  })();
+
+  /* ---- 3. KEY SCENE ---- */
+  (function(){
+    var canvas=document.getElementById('canvas-key'); if(!canvas){ console.warn('canvas-key not found'); return; }
+    var SW=isMobile?200:300, SH=isMobile?320:480;
+    var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setClearColor(0x000000,0);
+    renderer.setSize(SW,SH);
+    canvas.style.width=SW+'px'; canvas.style.height=SH+'px';
+    var scene=new THREE.Scene();
+    var camera=new THREE.PerspectiveCamera(45,SW/SH,0.1,100);
+    camera.position.set(0,0,6);
+    addLights(scene);
+
+    var group=new THREE.Group();
+    var mat=goldMat(0x5a3200,0.6);
+    group.add(new THREE.Mesh(new THREE.TorusGeometry(1.5,0.4,20,80),mat));
+    var hole=new THREE.Mesh(new THREE.TorusGeometry(0.65,0.18,10,40),new THREE.MeshStandardMaterial({color:GOLD_DARK,metalness:0.9,roughness:0.1,emissive:0x2a1800,emissiveIntensity:0.3})); group.add(hole);
+    var shaft=new THREE.Mesh(new THREE.BoxGeometry(0.5,4.2,0.5),mat); shaft.position.set(0,-3.3,0); group.add(shaft);
+    var t1=new THREE.Mesh(new THREE.BoxGeometry(1.0,0.4,0.5),mat); t1.position.set(0.6,-4.3,0); group.add(t1);
+    var t2=new THREE.Mesh(new THREE.BoxGeometry(0.8,0.4,0.5),mat); t2.position.set(0.5,-5.0,0); group.add(t2);
+    group.scale.setScalar(1.0);
+    scene.add(group);
+    canvas.style.opacity='0.25';
+    console.log('Scene 3 (Key) initialized');
+
+    var scrollY=0;
+    new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting) canvas.style.opacity='0.25';
+    },{threshold:0.05}).observe(document.getElementById('why'));
+    window.addEventListener('scroll',function(){ scrollY=window.scrollY; });
+
+    var t=0;
+    (function loop(){
+      requestAnimationFrame(loop); t+=0.007;
+      group.rotation.y+=0.009;
+      group.rotation.z=Math.sin(t)*0.08;
+      group.position.y=Math.sin(t)*0.2;
+      renderer.render(scene,camera);
+    })();
+  })();
+
+  /* ---- 4. HOUSE SCENE ---- */
+  (function(){
+    var canvas=document.getElementById('canvas-house'); if(!canvas){ console.warn('canvas-house not found'); return; }
+    var SZ=isMobile?180:280;
+    var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setClearColor(0x000000,0);
+    renderer.setSize(SZ,SZ);
+    canvas.style.width=SZ+'px'; canvas.style.height=SZ+'px';
+    var scene=new THREE.Scene();
+    var camera=new THREE.PerspectiveCamera(45,1,0.1,100);
+    camera.position.set(0,0.5,6);
+    addLights(scene);
+
+    var group=new THREE.Group();
+    var mat=goldMat(0x5a3200,0.6);
+    group.add(new THREE.Mesh(new THREE.BoxGeometry(3,2,2),mat));
+    var roof=new THREE.Mesh(new THREE.ConeGeometry(2,1.5,4),new THREE.MeshStandardMaterial({color:GOLD_LIGHT,metalness:0.9,roughness:0.06,emissive:0x6a4200,emissiveIntensity:0.7}));
+    roof.position.y=1.75; roof.rotation.y=Math.PI/4; group.add(roof);
+    var ch=new THREE.Mesh(new THREE.BoxGeometry(0.35,0.7,0.35),mat); ch.position.set(0.7,2.5,0.3); group.add(ch);
+    var door=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.85,0.06),new THREE.MeshStandardMaterial({color:GOLD_DARK,metalness:0.8,roughness:0.2,emissive:0x2a1800,emissiveIntensity:0.4}));
+    door.position.set(0,-0.58,1.03); group.add(door);
+    var winMat2=new THREE.MeshStandardMaterial({color:0xffeebb,emissive:0xffcc44,emissiveIntensity:0.9,metalness:0.1,roughness:0.3});
+    [[-0.85,0.3],[0.85,0.3]].forEach(function(pos){
+      var win=new THREE.Mesh(new THREE.BoxGeometry(0.48,0.48,0.06),winMat2); win.position.set(pos[0],pos[1],1.03); group.add(win);
+    });
+    group.scale.setScalar(1.0);
+    scene.add(group);
+    canvas.style.opacity='0.9';
+    console.log('Scene 4 (House) initialized');
+
+    var spunIn=false, spinProgress=0;
+    new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting){ canvas.style.opacity='0.9'; if(!spunIn) spunIn=true; }
+    },{threshold:0.2}).observe(document.getElementById('about'));
+
+    var t=0;
+    (function loop(){
+      requestAnimationFrame(loop); t+=0.009;
+      if(spunIn && spinProgress<Math.PI*2){ spinProgress+=0.045; group.rotation.y=spinProgress; }
+      else { group.rotation.y+=0.007; }
+      group.position.y=Math.sin(t)*0.25;
+      renderer.render(scene,camera);
+    })();
+  })();
+
 })();
 
 /* FORM SUBMIT */
